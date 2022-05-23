@@ -1,0 +1,108 @@
+{% extends 'base.html' %}
+{% block X_content %}
+<style>
+    th, td {
+  padding: 15px;
+  text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+th {
+  background-color: #04AA6D;
+  color: white;
+}
+
+</style>
+<h1> all Notes</h1>
+
+<style>
+    .card
+     {
+    box-shadow: 0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%);
+    width:250px;
+    height:auto;
+    margin-right:3rem;
+    }
+
+.btn {
+  background-color: #FFFFFF;
+  border: 0;
+  border-radius: .5rem;
+  box-sizing: border-box;
+  color: #111827;
+  font-family: "Inter var",ui-sans-serif,system-ui,-apple-system,system-ui,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+  font-size: .875rem;
+  font-weight: 600;
+  line-height: 1.25rem;
+  padding: .75rem 1rem;
+  text-align: center;
+  text-decoration: none #D1D5DB solid;
+  text-decoration-thickness: auto;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+
+.buttons{
+  display: flex;
+  align-items: center;
+  font-family: inherit;
+  font-weight: 500;
+  font-size: 16px;
+  padding: 0.7em 1.4em 0.7em 1.1em;
+  color: white;
+  background: #ad5389;
+  background: linear-gradient(0deg, rgba(20,167,62,1) 0%, rgba(102,247,113,1) 100%);
+  border: none;
+  box-shadow: 0 0.7em 1.5em -0.5em #14a73e98;
+  letter-spacing: 0.05em;
+  border-radius: 20em;
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+
+
+</style>
+<div style="display:flex;flex-wrap:wrap;justify-content:center;" class="w3-container">
+    {% if list %}
+    {% for i in list %}
+    <div class="card" style="background:linear-gradient(to right,{{ i.color }})">
+<!--    <div class="card" background={{ i.color }}>-->
+        <div style="text-align:center">
+            <h2 style="margin:10px 0"> {{ i.title}}</h2>
+        </div>
+            <div style="text-align:right">{{ i.date}}</div>
+        <p style="font-size:10px"><h4>{{ i.text }} </h4></p>
+
+
+        <div style="display:flex; justify-content:space-between;align-items:cente; padding:10px 20px">
+            <form action="{% url 'deletenote' i.id  %}" method="post">
+                {% csrf_token %}
+                <input class="btn" type="submit" value="Delete">
+            </form>
+
+            <form action="{% url 'updatenote' i.id  %}" method="get">
+                {% csrf_token %}
+                <input class="btn" type="submit" value="Update">
+            </form>
+        </div>
+    </div>
+    {% endfor %}
+    {% else %}
+    <h2>No Records</h2>
+    {% endif %}
+
+<div class="buttons" style="position:absolute; top:100% ;right:10px;">
+
+<a href="{% url 'create'  %}">Create Note</a>
+</div>
+</div>
+
+
+
+{%  endblock %}

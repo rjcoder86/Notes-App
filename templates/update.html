@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block X_content %}
+<style>
+    input{
+    padding: 0.5rem;
+    border-radius: 5px;
+    border: 1px solid grey;
+    }
+
+</style>
+
+<div align="center">
+<h1>Update Note</h1>
+
+<form action=" " method="post">
+         {% csrf_token %}
+        {{ form.as_p }}
+    <input type="submit" value="Update" >
+</form>
+    {% if messages %}
+    {% for m in  messages %}
+    {{m}}
+    {% endfor %}
+    {% endif %}
+</div>
+{% endblock %}
