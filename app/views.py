@@ -1,11 +1,14 @@
+import sys
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render,redirect
+
 from .models import Note
 from .forms import noteform
 from django.contrib import messages
 
 # Create your views here.
 def readall(request):
+    print(sys.path)
     notes = Note.objects.all()
     return render(request, 'allnotes.html', {'list': notes})
 
@@ -40,3 +43,4 @@ def updatenote(request,id):
         note = Note.objects.get(pk=id)
         form=noteform(instance=note)
     return render (request,'update.html',{'form':form})
+

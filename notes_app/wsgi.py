@@ -8,9 +8,11 @@ https://docs.djangoproject.com/en/4.0/howto/deployment/wsgi/
 """
 
 import os
+import sys
 
 from django.core.wsgi import get_wsgi_application
+from django.http import request
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'notes_app.settings')
-
 application = get_wsgi_application()
+
