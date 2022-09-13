@@ -74,7 +74,7 @@ th {
         <p style="font-size:10px">{{ i.text }}</p>
 
 
-        <div style="display:flex; justify-content:space-between;align-items:cente; padding:0 20px">
+        <div style="display:flex; justify-content:space-between;align-items:center; padding:0 20px">
             <form action="{% url 'deletenote' i.id  %}" method="post">
                 {% csrf_token %}
                 <input class="btn" type="submit" value="Delete">
