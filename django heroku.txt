@@ -1,0 +1,33 @@
+1. create python envronment
+2. create python django project and app
+3. add runtime.txt, Procfile and requirements.txt file inside a folder containing 
+   manage.py file 
+4. activate vritual env 
+5. terminal command-- pip install dj-database-url gunicorn whitenoise
+6. inside Procfile : web: gunicorn <project_name>.wsgi --log-file -
+7. pip freeze > requirements.txt
+8. inside Runtime.txt : python-3.10.3 
+9. inside settings.py : DEBUG = False
+                        ALLOWED_HOSTS = ['127.0.0.1', '.herokuapp.com']
+                        install apps-'whitenoise.runserver_nostatic',
+				middleware-'whitenoise.middleware.WhiteNoiseMiddleware',
+				
+			after db settings add-- WHITENOISE_USE_FINDERS = True
+				import dj_database_url
+				db_from_env = dj_database_url.config(conn_max_age=500)
+				DATABASES['default'].update(db_from_env)
+				
+				STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+8.terminal commands-- heroku login
+	   git init 
+	  git status
+	 git add -A .
+	 git commit -m "initial commit"
+	  heroku create <appname> --buildpack heroku/python
+	  heroku config:set DEBUG_COLLECTSTATIC=1
+	 heroku config:set DISABLE_COLLECTSTATIC=1
+ 	git push heroku master
+	heroku run python manage.py migrate
+	heroku run python manage.py createsuperuser
+	heroku open
